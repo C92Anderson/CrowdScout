@@ -9,7 +9,7 @@ Web Development
 </head>
 
 <body>
-<a href="http://www.crowdscout.net"> crowdscout </a> <b>the best</b>
+<a href="http://www.crowdscout.net"> crowdscout </a>
 </body>
 
 </html>
