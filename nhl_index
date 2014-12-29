@@ -1,4 +1,5 @@
 <?php include('includes/database.php'); ?>
+<?php include('nhl_h2h_sample.php'); ?>
 <?php
 	//Create the select query, use sql to pulll 2 players for head to head
 	//index & submit will select to random player numbers, these are displayed in the PHP
@@ -58,7 +59,7 @@
 	  				<div class="container-fluid">
 	    			<!-- Brand and toggle get grouped for better mobile display -->
 	    			<div class="navbar-header">
-	    				<a class="navbar-brand" href="index.html">Crowd Scout</a>
+	    				<a class="navbar-brand" href="index.php">Crowd Scout</a>
 	    			  	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 	  			   		    <span class="sr-only">Toggle navigation</span>
 					        <span class="icon-bar"></span>
@@ -70,8 +71,10 @@
 				    <!-- Collect the nav links, forms, and other content for toggling -->
 				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				      <ul class="nav navbar-nav navbar-left">
-					        <li class="active"><a href="nfl.php">NFL Scout<span class="sr-only">(current)</span></a></li>
-					        <li><a href="nhl_form.php?p1=8471716&p2=8476857">NHL Scout</a></li>
+					        <li><a href="nfl.php">NFL Scout</a></li>
+
+					        <li><a href="nhl_form.php?p1=<?php echo $p1['rand1'];?>&p2=<?php echo $p2['rand2'];?>">NHL Scout</a></li>
+
 					        <li><a href="#">MLB Scout</a></li>
 					        <li><a href="#">NBA Scout</a></li>
 					  </ul>
@@ -112,8 +115,7 @@
 				     	</ul>
 						</div><!-- /.navbar-collapse -->
 					</div><!-- /.container-fluid -->
-				</nav>
-			</div>
+
 		</header>
 	</head>
 	
