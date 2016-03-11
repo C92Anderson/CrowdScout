@@ -1,4 +1,4 @@
 CrowdScout
 ==========
 
-Web Developmentl
+Web Development
