@@ -42,7 +42,7 @@ $user_id = $_SESSION['user_id'] ;
 	$conn->close();
  
 //////////HOCKEY
-	$conn = new mysqli("mysql.crowd-scout.net", "ca_elo_games", "cprice31!","crowdscout_main");
+	$conn = new mysqli("mysql.crowd-scout.net", "ca_elo_games", "xxxx!","crowdscout_main");
 	// Check connection
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
