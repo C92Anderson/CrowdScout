@@ -15,52 +15,52 @@ $_SESSION['no_insert'] = True ;
 		die("Connection failed: " . $conn->connect_error);
 	} 
 
-		$football_topQB = $conn->query("SELECT player_name, elo2
+		$football_topQB = $conn->query("SELECT player_name, score
 				FROM `football_toplists` A
 					WHERE class = 'QB'
-				ORDER BY cron_ts - to_seconds(cron_ts) DESC, elo DESC 
+				ORDER BY cron_ts - to_seconds(cron_ts) DESC, score DESC 
 				limit 10");
 		$_POST['football_topQB'] = $football_topQB ;
 
-		$football_topRB = $conn->query("SELECT player_name, elo2
+		$football_topRB = $conn->query("SELECT player_name, score
 				FROM `football_toplists` A
 					WHERE class = 'RB'
-				ORDER BY cron_ts - to_seconds(cron_ts) DESC, elo DESC 
+				ORDER BY cron_ts - to_seconds(cron_ts) DESC, score DESC 
 				limit 10");
 		$_POST['football_topRB'] = $football_topRB ;
 	 
-		$football_topWR = $conn->query("SELECT player_name, elo2
+		$football_topWR = $conn->query("SELECT player_name, score
 				FROM `football_toplists` A
 					WHERE class = 'WR'
-				ORDER BY cron_ts - to_seconds(cron_ts) DESC, elo DESC 
+				ORDER BY cron_ts - to_seconds(cron_ts) DESC, score DESC 
 				LIMIT 10");
 		$_POST['football_topWR'] = $football_topWR ;
 	
-		$football_topOL = $conn->query("SELECT player_name, elo2
+		$football_topOL = $conn->query("SELECT player_name, score
 				FROM `football_toplists` A
 					WHERE class = 'OL'
-				ORDER BY cron_ts - to_seconds(cron_ts) DESC, elo DESC
+				ORDER BY cron_ts - to_seconds(cron_ts) DESC, score DESC
 				LIMIT 10");
 		$_POST['football_topOL'] = $football_topOL ;
 
-		$football_topF7 = $conn->query("SELECT player_name, elo2
+		$football_topF7 = $conn->query("SELECT player_name, score
 				FROM `football_toplists` A
 					WHERE class = 'Front7'
-				ORDER BY cron_ts - to_seconds(cron_ts) DESC, elo DESC
+				ORDER BY cron_ts - to_seconds(cron_ts) DESC, score DESC
 				LIMIT 10");
 		$_POST['football_topF7'] = $football_topF7 ;
 		
-		$football_top2nd = $conn->query("SELECT player_name, elo2
+		$football_top2nd = $conn->query("SELECT player_name, score
 				FROM `football_toplists` A
 					WHERE class = 'Secondar'
-				ORDER BY cron_ts - to_seconds(cron_ts) DESC, elo DESC
+				ORDER BY cron_ts - to_seconds(cron_ts) DESC, score DESC
 				LIMIT 10");
 		$_POST['football_top2nd'] = $football_top2nd ;	
 
-		$football_topKP = $conn->query("SELECT player_name, elo2
+		$football_topKP = $conn->query("SELECT player_name, score
 				FROM `football_toplists` A
 					WHERE class = 'Special'
-				ORDER BY cron_ts - to_seconds(cron_ts) DESC, elo DESC
+				ORDER BY cron_ts - to_seconds(cron_ts) DESC, score DESC
 				LIMIT 10");
 		$_POST['football_topKP'] = $football_topKP ;		
 
@@ -75,7 +75,7 @@ $_SESSION['no_insert'] = True ;
 	$football_fallers = $conn->query("SELECT player_name, elo2
 				FROM `football_toplists` A
 					WHERE class = 'FALLERS'
-				ORDER BY cron_ts - to_seconds(cron_ts) DESC, elo DESC
+				ORDER BY cron_ts - to_seconds(cron_ts) DESC, elo
 				LIMIT 10");
 	$_POST['football_fallers'] = $football_fallers ;
 
@@ -159,7 +159,7 @@ $_SESSION['no_insert'] = True ;
 		<div class="purple col-sm-4">
 			<div class="panel panel-primary">
 
-			<div class="panel-heading">Top 10 Quarterbacks (Elo)</div>
+			<div class="panel-heading">Top 10 Quarterbacks<br>CS Score (0-100)</div>
 			<div class="panel-body">
 				<ol>
 				<?php 
@@ -169,7 +169,7 @@ $_SESSION['no_insert'] = True ;
 						    //$rank = 0;
 						    while($row = $football_topQB->fetch_assoc()) {
 							//$rank ++ ;
-							echo "<li>" . $row["player_name"]. " (" . round($row["elo2"],0) . ")</li>";
+							echo "<li>" . $row["player_name"]. " (" . round($row["score"],0) . ")</li>";
 							}
 						} else {
 						echo "Error:<br>I am not top 10 programmer";
@@ -182,7 +182,7 @@ $_SESSION['no_insert'] = True ;
 
 		<div class="col-sm-4">
 			<div class="panel panel-primary">
-			<div class="panel-heading">Top 10 Running Backs (Elo)</div>
+			<div class="panel-heading">Top 10 Running Backs<br>CS Score (0-100)</div>
 			<div class="panel-body">
 				<ol>
 				<?php 
@@ -192,7 +192,7 @@ $_SESSION['no_insert'] = True ;
 					    //$rank = 0;
 					    while($row = $football_topRB->fetch_assoc()) {
 						//$rank ++ ;
-						echo "<li>" . $row["player_name"] . " (" . round($row["elo2"],0) . ")</li>";
+						echo "<li>" . $row["player_name"] . " (" . round($row["score"],0) . ")</li>";
 						}
 					} else {
 					    echo "Error:<br>I am bottom 10 programmer";
@@ -204,7 +204,7 @@ $_SESSION['no_insert'] = True ;
 		</div>
 		<div class="col-sm-4">
 			<div class="panel panel-primary">
-			<div class="panel-heading">Top 10 Receivers (Elo)</div>
+			<div class="panel-heading">Top 10 Receivers<br>CS Score (0-100)</div>
 			<div class="panel-body">
 				<ol>
 				<?php 
@@ -214,7 +214,7 @@ $_SESSION['no_insert'] = True ;
 					    //$rank = 0;
 					    while($row = $football_topWR->fetch_assoc()) {
 						//$rank ++ ;
-						echo "<li>" . $row["player_name"] . " (" . round($row["elo2"],0) . ")</li>";
+						echo "<li>" . $row["player_name"] . " (" . round($row["score"],0) . ")</li>";
 						}
 					} else {
 					    echo "Error:<br>I am bottom 10 programmer";
@@ -231,7 +231,7 @@ $_SESSION['no_insert'] = True ;
 		<div class="purple col-sm-4">
 			<div class="panel panel-primary">
 
-			<div class="panel-heading">Top 10 OLineman (Elo)</div>
+			<div class="panel-heading">Top 10 OLineman<br>CS Score (0-100)</div>
 			<div class="panel-body">
 				<ol>
 				<?php 
@@ -241,7 +241,7 @@ $_SESSION['no_insert'] = True ;
 						    //$rank = 0;
 						    while($row = $football_topOL->fetch_assoc()) {
 							//$rank ++ ;
-							echo "<li>" . $row["player_name"]. " (" . round($row["elo2"],0) . ")</li>";
+							echo "<li>" . $row["player_name"]. " (" . round($row["score"],0) . ")</li>";
 							}
 						} else {
 						echo "Error:<br>I am not top 10 programmer";
@@ -254,7 +254,7 @@ $_SESSION['no_insert'] = True ;
 
 		<div class="col-sm-4">
 			<div class="panel panel-primary">
-			<div class="panel-heading">Top 10 Front 7 (Elo)</div>
+			<div class="panel-heading">Top 10 Front 7<br>CS Score (0-100)</div>
 			<div class="panel-body">
 				<ol>
 				<?php 
@@ -264,7 +264,7 @@ $_SESSION['no_insert'] = True ;
 					    //$rank = 0;
 					    while($row = $football_topF7->fetch_assoc()) {
 						//$rank ++ ;
-						echo "<li>" . $row["player_name"] . " (" . round($row["elo2"],0) . ")</li>";
+						echo "<li>" . $row["player_name"] . " (" . round($row["score"],0) . ")</li>";
 						}
 					} else {
 					    echo "Error:<br>I am bottom 10 programmer";
@@ -276,7 +276,7 @@ $_SESSION['no_insert'] = True ;
 		</div>
 		<div class="col-sm-4">
 			<div class="panel panel-primary">
-			<div class="panel-heading">Top 10 Secondary (Elo)</div>
+			<div class="panel-heading">Top 10 Secondary<br>CS Score (0-100)</div>
 			<div class="panel-body">
 				<ol>
 				<?php 
@@ -286,7 +286,7 @@ $_SESSION['no_insert'] = True ;
 					    //$rank = 0;
 					    while($row = $football_top2nd->fetch_assoc()) {
 						//$rank ++ ;
-						echo "<li>" . $row["player_name"] . " (" . round($row["elo2"],0) . ")</li>";
+						echo "<li>" . $row["player_name"] . " (" . round($row["score"],0) . ")</li>";
 						}
 					} else {
 					    echo "Error:<br>I am bottom 10 programmer";
@@ -303,7 +303,7 @@ $_SESSION['no_insert'] = True ;
 	<div class="row">
 		<div class="col-sm-4">
 			<div class="panel panel-primary">
-			<div class="panel-heading">Trending Up (Last Week)</div>
+			<div class="panel-heading">Trending Up<br>(Last Week Elo)</div>
 			<div class="panel-body">
 				<ol>
 				<?php 
@@ -326,7 +326,7 @@ $_SESSION['no_insert'] = True ;
 		
 		<div class="col-sm-4">
 			<div class="panel panel-primary">
-			<div class="panel-heading">Trending Down (Last Week)</div>
+			<div class="panel-heading">Trending Down<br>(Last Week Elo)</div>
 			<div class="panel-body">
 				<ol>
 				<?php 
@@ -349,7 +349,7 @@ $_SESSION['no_insert'] = True ;
 
 		<div class="col-sm-4">
 			<div class="panel panel-primary">
-			<div class="panel-heading">Top 10 Special Teams (Elo)</div>
+			<div class="panel-heading">Top 10 Special Teams<br>CS Score (0-100)</div>
 			<div class="panel-body">
 				<ol>
 				<?php 
@@ -359,7 +359,7 @@ $_SESSION['no_insert'] = True ;
 					    //$rank = 0;
 					    while($row = $football_topKP->fetch_assoc()) {
 						//$rank ++ ;
-						echo "<li>" . $row["player_name"] . " (" . round($row["elo2"],0) . ")</li>";
+						echo "<li>" . $row["player_name"] . " (" . round($row["score"],0) . ")</li>";
 						}
 					} else {
 					    echo "Error:<br>I am bottom 10 programmer";

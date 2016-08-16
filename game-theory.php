@@ -23,16 +23,12 @@ $mysqli->close();
 	<head>
 	<meta charset="UTF-8">
 	<meta name="google-site-verification" content="Zq3wnZjPy7XD54ZlMrmn3jYlyxtGR-cY_OyRLCBCtYc" />
-	<meta name="description" content="Crowd Scouting Player Rankings">
-	<meta name="keywords" content="Football,Hockey,Baseball,Basketball,Player,Rankings,Scout,Scouting">
-		<title>Player Compare Tool</title>
+	<meta name="description" content="CrowdScout Game Theory Blog">
+	<meta name="keywords" content="Football,Hockey,Baseball,Basketball,Player,Rankings,Game,Theory,Blog">
+		<title>Game Theory Blog</title>
 
 		<?php include('header.php');?>
 	
-		<!-- csLogo2 (all blue font) has font of 8514oem-->
-		<div class="container">
-	
-		</div>
 	</head>
 	
 
@@ -47,29 +43,25 @@ $mysqli->close();
 		  fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));</script>
 
-		<div class="container">
+		 <!--div clas="container">
 	
 		
-		<h2>Hockey Player Compare Tool
-					<!--facebook-->
-					<div class="fb-share-button" data-href="http://www.crowdscoutsports.com/hockey_p_compare.php" data-layout="button_count"></div>
+		<h2>Game Theory Blog
+					<div class="fb-share-button" data-href="http://crowdscoutsports.blogspot.com" data-layout="button_count"></div>
 
-					<!--twitter  			 data-size="large"-->
-					<a href="https://twitter.com/share" class="twitter-share-button" data-url="crowdscoutsports.com/hockey_p_compare.php" 
-					data-text="CrowdScout Sports - if you really like sports: crowdscoutsports.com/hockey_p_compare.php"  
-					data-via="CrowdScoutSprts" data-hashtags="scouting">Share
+					<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://crowdscoutsports.blogspot.com" 
+					data-text="CrowdScout Sports - Game Theory Blog: http://crowdscoutsports.blogspot.com"  
+					data-via="CrowdScoutSprts">Share
 					</a>
 					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 		 </h2>
 
+		 </div-->
 
-
-		 <div clas="container">
+		<div class="container">
 		
-		<iframe src="https://crowdscoutsports.shinyapps.io/Hockey_Compare/" style="border: none; width:100%; height:700px"></iframe>
+		<iframe src="http://crowdscoutsports.blogspot.com" style="border: none; width:100%; height:700px"></iframe>
 		
-
-		</div>
 		</div>	
 
 		<?php include('footer.php'); ?>		

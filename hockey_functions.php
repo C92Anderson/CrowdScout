@@ -9,11 +9,11 @@ function pairsimHKY($select) {
 
 $pos_list = "All";
 if($_SESSION['pC']==1) {  $pos_list = $pos_list."|C"; }
-if($_SESSION['pW']==1) {  $pos_list = $pos_list."|W"; }
+if($_SESSION['pW']==1) {  $pos_list = $pos_list."|L|R|W"; }
 if($_SESSION['pD']==1) {  $pos_list = $pos_list."|D"; }
 if($_SESSION['pG']==1) {  $pos_list = $pos_list."|G"; }
 if($pos_list=="All") {
-	$pos_list = "C|W|D|G" ;
+	$pos_list = "C|L|R|W|D|G" ;
 }
 
 

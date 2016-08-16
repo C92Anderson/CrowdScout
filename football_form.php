@@ -21,13 +21,63 @@ $scout = $_SESSION['login_user'] ;
 	$player2 = $_GET[p2];
 	$user_id = $_SESSION['user_id'];
 	
-	$query1 ="SELECT cs_id as player_id1, a.player_name as player_name1, a.pos as player_position1, team as player_team1, round(DATEDIFF(current_date(),DOB)/365.25,1) as age1,
-			a.height, a.weight, draft_info, school
-			 FROM football_roster_v1 as a
+	$query1 ="SELECT cs_id as player_id1, a.player_name as player_name1, a.pos as player_position1, a.team as player_team1, round(DATEDIFF(current_date(),DOB)/365.25,1) as age1,
+			a.height, a.weight, draft_info, school,
+			COALESCE(b.OVERALL,c.OVERALL,d.OVERALL,e.OVERALL,f.OVERALL,g.OVERALL,h.OVERALL) as PFF_Overall,
+			COALESCE(b.PASS_SNAPS,c.PASS_SNAPS,d.PASS_SNAPS,e.PASS_SNAPS,f.PASS_SNAPS,g.PASS_SNAPS,h.PASS_SNAPS) as PFF_Pass_Snaps,
+			COALESCE(b.RUN_SNAPS,c.RUN_SNAPS,d.RUN_SNAPS,e.RUN_SNAPS,f.RUN_SNAPS,g.RUN_SNAPS,h.RUN_SNAPS) as PFF_Run_Snaps,
+			b.PASS as PFF_Pass,
+			COALESCE(b.RUN,c.RUN,d.RUN) as PFF_Run,
+			COALESCE(c.RECEIVING,d.RECEIVING) as PFF_Receiving,
+			COALESCE(c.PASS_BLOCK,e.PASS_BLOCK) as PFF_Pass_Block,
+			COALESCE(c.RUN_BLOCK,d.RUN_BLOCK,e.RUN_BLOCK) as PFF_Run_Block,
+			COALESCE(f.COVERAGE,g.COVERAGE,h.COVERAGE) as PFF_Coverage,
+			COALESCE(f.RUN_DEFENSE,g.RUN_DEFENSE,h.RUN_DEFENSE) as PFF_Run_Defense,
+			COALESCE(f.PASS_RUSH,g.PASS_RUSH,h.PASS_RUSH) as PFF_Pass_Rush
+			FROM football_roster_R as a
+			LEFT JOIN PFF_Passers as b
+			 	ON a.player_name=b.Name and a.meta_pos=b.meta_pos
+			LEFT JOIN PFF_Runners as c
+			 	ON a.player_name=c.Name and a.meta_pos=c.meta_pos
+			LEFT JOIN PFF_Receivers as d
+			 	ON a.player_name=d.Name and a.meta_pos=d.meta_pos			
+			 LEFT JOIN PFF_Blockers as e
+			 	ON a.player_name=e.Name and a.meta_pos=e.meta_pos			
+			 LEFT JOIN PFF_Secondary as f
+			 	ON a.player_name=f.Name and a.meta_pos=f.meta_pos			  	
+			 LEFT JOIN PFF_Backers as g
+			 	ON a.player_name=g.Name and a.meta_pos=g.meta_pos			  	
+			 LEFT JOIN PFF_Linemen as h
+			 	ON a.player_name=h.Name and a.meta_pos=h.meta_pos			  	
 			 where cs_id = '$player1'";
-	$query2 ="SELECT cs_id as player_id2, a.player_name as player_name2, a.pos as player_position2, team as player_team2, round(DATEDIFF(current_date(),DOB)/365.25,1) as age2,
-			 a.height, a.weight, draft_info, school
-			 FROM football_roster_v1 as a
+	$query2 ="SELECT cs_id as player_id2, a.player_name as player_name2, a.pos as player_position2, a.team as player_team2, round(DATEDIFF(current_date(),DOB)/365.25,1) as age2,
+			 a.height, a.weight, draft_info, school,
+			 COALESCE(b.OVERALL,c.OVERALL,d.OVERALL,e.OVERALL,f.OVERALL,g.OVERALL,h.OVERALL) as PFF_Overall,
+			COALESCE(b.PASS_SNAPS,c.PASS_SNAPS,d.PASS_SNAPS,e.PASS_SNAPS,f.PASS_SNAPS,g.PASS_SNAPS,h.PASS_SNAPS) as PFF_Pass_Snaps,
+			COALESCE(b.RUN_SNAPS,c.RUN_SNAPS,d.RUN_SNAPS,e.RUN_SNAPS,f.RUN_SNAPS,g.RUN_SNAPS,h.RUN_SNAPS) as PFF_Run_Snaps,
+			b.PASS as PFF_Pass,
+			COALESCE(b.RUN,c.RUN,d.RUN) as PFF_Run,
+			COALESCE(c.RECEIVING,d.RECEIVING) as PFF_Receiving,
+			COALESCE(c.PASS_BLOCK,e.PASS_BLOCK) as PFF_Pass_Block,
+			COALESCE(c.RUN_BLOCK,d.RUN_BLOCK,e.RUN_BLOCK) as PFF_Run_Block,
+			COALESCE(f.COVERAGE,g.COVERAGE,h.COVERAGE) as PFF_Coverage,
+			COALESCE(f.RUN_DEFENSE,g.RUN_DEFENSE,h.RUN_DEFENSE) as PFF_Run_Defense,
+			COALESCE(f.PASS_RUSH,g.PASS_RUSH,h.PASS_RUSH) as PFF_Pass_Rush
+			FROM football_roster_R as a
+			LEFT JOIN PFF_Passers as b
+			 	ON a.player_name=b.Name and a.meta_pos=b.meta_pos
+			LEFT JOIN PFF_Runners as c
+			 	ON a.player_name=c.Name and a.meta_pos=c.meta_pos
+			LEFT JOIN PFF_Receivers as d
+			 	ON a.player_name=d.Name and a.meta_pos=d.meta_pos			
+			 LEFT JOIN PFF_Blockers as e
+			 	ON a.player_name=e.Name and a.meta_pos=e.meta_pos			
+			 LEFT JOIN PFF_Secondary as f
+			 	ON a.player_name=f.Name and a.meta_pos=f.meta_pos			  	
+			 LEFT JOIN PFF_Backers as g
+			 	ON a.player_name=g.Name and a.meta_pos=g.meta_pos			  	
+			 LEFT JOIN PFF_Linemen as h
+			 	ON a.player_name=h.Name and a.meta_pos=h.meta_pos			  	
 			 where cs_id = '$player2'";
 
 			
@@ -221,7 +271,7 @@ if(isset($_POST['result'])){
 				<button type="submit" class="btn btn-default btn-lg btn-block" 
 				formaction=<?php pairsimFB(50) ; ?> >
 					<?php if(isset($echo2['player_name2'])){
-						echo "Too Close (Next)";
+						echo "Not Sure (Next)";
 					} else {
 						echo "Try Again - New Matchup";
 					} ?>
@@ -229,32 +279,32 @@ if(isset($_POST['result'])){
 			</form>
 		</div>
 		</div>
-		<div class="row">
+		<!--div class="row">
 		<div class="col-lg-12">
 			<form name="football_game" action="football_form.php" method="POST">
-				<input type="hidden" name="p1" value="<?php echo $echo1['player_id1'];?>">
-				<input type="hidden" name="p2" value="<?php echo $echo2['player_id2'];?>">
-				<input type="hidden" name="pnm1" value="<?php echo $echo1['player_name1'];?>">
-				<input type="hidden" name="pnm2" value="<?php echo $echo2['player_name2'];?>">
-				<input type="hidden" name="p1_team" value="<?php echo $echo1['player_team1'];?>">
-				<input type="hidden" name="p2_team" value="<?php echo $echo2['player_team2'];?>">
+				<input type="hidden" name="p1" value="<?php //echo $echo1['player_id1'];?>">
+				<input type="hidden" name="p2" value="<?php //echo $echo2['player_id2'];?>">
+				<input type="hidden" name="pnm1" value="<?php //echo $echo1['player_name1'];?>">
+				<input type="hidden" name="pnm2" value="<?php //echo $echo2['player_name2'];?>">
+				<input type="hidden" name="p1_team" value="<?php //echo $echo1['player_team1'];?>">
+				<input type="hidden" name="p2_team" value="<?php //echo $echo2['player_team2'];?>">
 				<input type="hidden" name="result" value="unknown">
-				<input type="hidden" name="user_id" value="<?php echo $user_id ;?>">
-				<input type="hidden" name="prior_elo1" value="<?php echo $p1_elo ;?>">
-				<input type="hidden" name="prior_elo2" value="<?php echo $p2_elo ;?>">
-				<input type="hidden" name="post_elo1" value="<?php echo $p1_elo ;?>">
-				<input type="hidden" name="post_elo2" value="<?php echo $p2_elo ;?>">
+				<input type="hidden" name="user_id" value="<?php //echo $user_id ;?>">
+				<input type="hidden" name="prior_elo1" value="<?php //echo $p1_elo ;?>">
+				<input type="hidden" name="prior_elo2" value="<?php //echo $p2_elo ;?>">
+				<input type="hidden" name="post_elo1" value="<?php //echo $p1_elo ;?>">
+				<input type="hidden" name="post_elo2" value="<?php //echo $p2_elo ;?>">
 				<button type="submit" class="btn btn-primary btn-lg btn-block"
 				formaction=<?php pairsimFB(50) ; ?> >
-					<?php if(isset($echo2['player_name2'])){
-						echo "Don't Know (Next)";
-					} else {
-						echo "Try Again - New Matchup";
-					} ?>
+					<?php// if(isset($echo2['player_name2'])){
+						//echo "Don't Know (Next)";
+					//} else {
+						//echo "Try Again - New Matchup";
+					//} ?>
 				</button>
 			</form>
 		</div>
-		</div>
+		</div-->
 	</div>
 	<br>
 
@@ -311,12 +361,47 @@ if(isset($_POST['result'])){
 						<td><?php echo $echo1['age1'];?></td>
 						<td><?php echo $echo2['age2'];?></td>
 					</tr>
-					<tr>
+					<!--tr>
 						<td><span class="glyphicon glyphicon-book" aria-hidden="true"></span></td>
-						<td><?php echo $echo1['school'];?></td>
-						<td><?php echo $echo2['school'];?></td>
+						<td><?php //echo $echo1['school'];?></td>
+						<td><?php //echo $echo2['school'];?></td>
+					</tr-->
+					<tr>
+						<td><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Pass Snaps</td>
+						<td><?php echo round($echo1['PFF_Pass_Snaps'],1);?></td>
+						<td><?php echo round($echo2['PFF_Pass_Snaps'],1);?></td>
 					</tr>		
-							
+					<tr>
+						<td><span class="glyphicon glyphicon-forward" aria-hidden="true"></span> Run Snaps</td>
+						<td><?php echo round($echo1['PFF_Run_Snaps'],1);?></td>
+						<td><?php echo round($echo2['PFF_Run_Snaps'],1);?></td>
+					</tr>				
+					<tr>
+						<td><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> PFF Overall</td>
+						<td><?php echo round($echo1['PFF_Overall'],1);?></td>
+						<td><?php echo round($echo2['PFF_Overall'],1);?></td>
+					</tr>				
+					<!--tr>
+						<td><span class="glyphicon glyphicon-export" aria-hidden="true"></span></td>
+						<td><?php echo $echo1['PFF_Pass_Snaps'];?></td>
+						<td><?php echo $echo2['PFF_Pass_Snaps'];?></td>
+					</tr>				
+					<tr>
+						<td><span class="glyphicon glyphicon-export" aria-hidden="true"></span></td>
+						<td><?php echo $echo1['PFF_Pass_Snaps'];?></td>
+						<td><?php echo $echo2['PFF_Pass_Snaps'];?></td>
+					</tr>				
+					<tr>
+						<td><span class="glyphicon glyphicon-export" aria-hidden="true"></span></td>
+						<td><?php echo $echo1['PFF_Pass_Snaps'];?></td>
+						<td><?php echo $echo2['PFF_Pass_Snaps'];?></td>
+					</tr>				
+					<tr>
+						<td><span class="glyphicon glyphicon-export" aria-hidden="true"></span></td>
+						<td><?php echo $echo1['PFF_Pass_Snaps'];?></td>
+						<td><?php echo $echo2['PFF_Pass_Snaps'];?></td>
+					</tr-->				
+
 				</tbody>	
 			</table>
 		</div>
@@ -327,15 +412,16 @@ if(isset($_POST['result'])){
 	<div class="container-fluid">
 	<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 	  Show Legend
-	</button>
+	</button> 	
+	<br>
+	<p>Source: <a href="http://www.profootballfocus.com" target="_blank">profootballfocus.com</a></p>
 	</div>
 	<div class="collapse container-fluid" id="collapseExample">
 	  <div class="well">
 
-	 <div class="container-fluid">
-		<p><b>Note:</b>"Too Close" is used when both players are known, but can't be discerned. "Don't Know" will decrease the odds of receiving either player for a week.</p>
-	 </div>
-
+	  	<!--div class="container-fluid">
+			<p><b>Note:</b> "Too Close" is used when both players are known, but can't be discerned. "Don't Know" will decrease the odds of receiving either player for a week.</p>
+		</div-->
 	    <div class="panel-body table table-striped">
 				<table class="table table-striped">
 					<tbody>
@@ -371,10 +457,22 @@ if(isset($_POST['result'])){
 						<td><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
 						<td>Current Age</td>
 						</tr>	
-						<tr>
+						<!--tr>
 						<td><span class="glyphicon glyphicon-book" aria-hidden="true"></span></td>
 						<td>School</td>
-						</tr>						      							      							      							     
+						</tr-->
+						<tr>
+						<td><span class="glyphicon glyphicon-resize-play" aria-hidden="true"></td>
+						<td>Pass Snaps Played - Source: <a href="http://www.profootballfocus.com" target="_blank">profootballfocus.com</a></td>
+						</tr>
+						<tr>
+						<td><span class="glyphicon glyphicon-resize-forward" aria-hidden="true"></td>
+						<td>Run Snaps Played - Source: <a href="http://www.profootballfocus.com" target="_blank">profootballfocus.com</a></td>
+						</tr>
+						<tr>
+						<td><span class="glyphicon glyphicon-resize-stats" aria-hidden="true"></td>
+						<td>PFF Overall Rating - Source: <a href="http://www.profootballfocus.com" target="_blank">profootballfocus.com</a></td>
+						</tr>
 					</tbody>	
 				</table>
 			</div>

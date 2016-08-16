@@ -68,7 +68,7 @@ $mysqli->close();
 	
 		<!-- csLogo2 (all blue font) has font of 8514oem-->
 		<div class="container">
-		<h2>CrowdScout</h2>
+		<h2><img src="images/logo_v4.png" height="90" width="333"></h2>
 		<h3>Combining Quantitative and Qualitative Analysis</h3 role="banner">
 		</div>
 	</head>
@@ -92,9 +92,9 @@ $mysqli->close();
 			<div class="jumbotron">
 			<!--div class="purple col-sm-12"-->
 			<!--h3>The CrowdScout Manifesto</h3-->
-				<p>CrowdScout is a platform to combine qualitative (eyes) and quantitative (aglos) information by aggregating user input to create a quantified player-rating system that tracks performance across time.
+				<p>CrowdScout is a platform to combine qualitative (eyes) and quantitative (algos) information by aggregating user input to create a quantified player-rating system that tracks performance across time.
 				<br></br>
-				Sports analytics have grown tremendously in recent years - thanks to publicly scrapable data and focused, inquisitive  minds - to the benefit of (rational) fans everywhere.
+				Sports analytics have grown tremendously in recent years - thanks to publicly scrapable data and focused, inquisitive minds - to the benefit of (rational) fans everywhere.
 				However, the first generation of available data has only really lent itself to macro, team-level analysis and very specific micro, player-level analysis.
 				<br><br>
 				CrowdScout transforms in-depth micro analyses and educated judgments into a comprehensive player rating metric by harnessing <a href="https://en.wikipedia.org/wiki/Elo_rating_system"  target="_tab">Elo Ratings</a>

@@ -42,7 +42,7 @@ $user_id = $_SESSION['user_id'] ;
 	$conn->close();
  
 //////////HOCKEY
-	$conn = new mysqli("mysql.crowd-scout.net", "ca_elo_games", "xxxx!","crowdscout_main");
+	$conn = new mysqli("mysql.crowd-scout.net", "ca_elo_games", "cprice31!","crowdscout_main");
 	// Check connection
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
@@ -75,7 +75,8 @@ $user_id = $_SESSION['user_id'] ;
 							FROM `crowdscout_main`.`user_team_ranks`
 							WHERE user_id = $getid
 								AND sport = 'hockey'
-								ORDER BY team_elo_mean desc";
+								ORDER BY FROM_UNIXTIME( TRUNCATE(UNIX_TIMESTAMP(cron_ts) / 90,0)*90) desc, team_elo_mean desc
+								limit 30";
 
 	$user_nhl_ranks = $conn->query($Quser_nhl_ranks) or die($conn->error.__LINE__);
 	$user_nhl_ranks2 = $conn->query($Quser_nhl_ranks) or die($conn->error.__LINE__);
@@ -143,7 +144,8 @@ $user_id = $_SESSION['user_id'] ;
 							FROM `crowdscout_main`.`user_team_ranks`
 							WHERE user_id = $getid
 								AND sport = 'football'
-								ORDER BY team_elo_mean desc";
+								ORDER BY FROM_UNIXTIME( TRUNCATE(UNIX_TIMESTAMP(cron_ts) / 90,0)*90) desc, team_elo_mean desc
+								limit 32";
 	$user_football_ranks = $conn->query($Quser_football_ranks) or die($conn->error.__LINE__);
 	$user_football_ranks2 = $conn->query($Quser_football_ranks) or die($conn->error.__LINE__);
   
@@ -473,7 +475,7 @@ $conn->close(); // Closing Connection
 		  						</tr>
 		  						<tr>
 		  							<td>
-									<h4><b>Bash Players:</b></h4>
+									<h4><b>Bashed Players:</b></h4>
 										<h5><?php if(isset($_POST['hockey_bash_strength'])) {
 			  									echo "(" . round($_POST['hockey_bash_strength'],2) . " Mean Elo)";
 			  								} 	

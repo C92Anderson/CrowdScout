@@ -15,37 +15,87 @@ $scout = $_SESSION['login_user'] ;
 	$player2 = $_GET[p2];
 	$user_id = $_SESSION['user_id'];
 	
-	$query1 ="SELECT a.nhl_id as player_id1, a.player_name as player_name1, a.pos as player_position1, team as player_team1, round(DATEDIFF(current_date(),DOB)/365.25,1) as age1,
-			a.height, a.weight, coalesce(draft_info, 'Undrafted') as draft_info, G60, A60, P60, coalesce(c.Gm, d.Gm) as Gm,`CF%`, `TOI/Gm`, `ZSO%Rel`, `AdSv%`, SA60, TOI 
+	$query1 ="SELECT a.nhl_id as player_id1, a.player_name as player_name1, a.pos as player_position1, a.team as player_team1, round(DATEDIFF(current_date(),DOB)/365.25,1) as age1,
+			a.height, a.weight, coalesce(draft_info, 'Undrafted') as draft_info, 
+			coalesce(d.G60, '--') as G60_1516, 
+			coalesce(d.A60, '--') as A60_1516, 
+			coalesce(d.P60, '--') as P60_1516, 
+			coalesce(f.Gm, d.Gm , '--') as Gm_1516, 
+			coalesce(d.`CF%`,'--') as CFPct_1516, 
+			coalesce(d.`CF%Rel`, '--') as CFRel_1516, 
+			coalesce(d.`CF60`, '--') as CF60_1516,
+			coalesce(d.`CA60`, '--') as CA60_1516,
+			coalesce(d.`TOI/Gm`, '--') as TOI_1516, 
+			coalesce(d.`ZSO%Rel`, '--') as ZSRel_1516, 
+			coalesce(d.`SCF%`, '--') as SCF_1516, 
+			coalesce(c.G60, '--') as G60_1415, 
+			coalesce(c.A60, '--') as A60_1415, 
+			coalesce(c.P60, '--') as P60_1415, 
+			coalesce(e.Gm, c.Gm, '--') as Gm_1415, 
+			coalesce(c.`CF%`, '--') as CFPct_1415, 
+			coalesce(c.`CF%Rel`, '--') as CFRel_1415,
+			coalesce(c.`CF60`, '--') as CF60_1415,
+			coalesce(c.`CA60`, '--') as CA60_1415,
+			coalesce(c.`TOI/Gm`, '--') as TOI_1415, 
+			coalesce(c.`ZSO%Rel`, '--') as ZSRel_1415, 
+			coalesce(c.`SCF%`, '--') as SCF_1415, 
+			coalesce(f.`AdSv%`, '--') as adjSV_1516, coalesce(f.`Sv%H`, '--') as hiSV_1516,
+			coalesce(e.`AdSv%`, '--') as adjSV_1415, coalesce(e.`Sv%H`, '--') as hiSV_1415
+
 			 FROM hockey_roster_v1 as a
 			 LEFT JOIN hockey_draft_v0 as b
 				on a.nhl_id = b.player_id
-			LEFT JOIN nhl_id_xwalk x
+			LEFT JOIN WAR_NHL_ID_walk x
 			 	on a.nhl_id = x.nhl_id
-			 LEFT JOIN CORSICA_skaters_1415 as c
-				on x.corsica_name=c.Player
-			 LEFT JOIN CORSICA_goalies_1415 as d
-				on x.corsica_name=d.Player
-			 LEFT JOIN CORSICA_skaters_1516 as e
-				on x.corsica_name=e.Player
-			 LEFT JOIN CORSICA_goalies_1516 as f
-				on x.corsica_name=f.Player
+			 LEFT JOIN  WAR_players_201415 as c
+				on x.WAR_Name=c.Name
+			 LEFT JOIN  WAR_players_201516 as d
+				on x.WAR_Name=d.Name
+			 LEFT JOIN  WAR_goalies_201415 as e
+				on x.WAR_Name=e.Name
+			 LEFT JOIN  WAR_goalies_201516 as f
+				on x.WAR_Name=f.Name
 			 where a.nhl_id = $player1";
-	$query2 ="SELECT a.nhl_id as player_id2, a.player_name as player_name2, a.pos as player_position2, team as player_team2, round(DATEDIFF(current_date(),DOB)/365.25,1) as age2,
-			 a.height, a.weight, coalesce(draft_info, 'Undrafted') as draft_info, G60, A60, P60, coalesce(c.Gm, d.Gm) as Gm, `CF%`, `TOI/Gm`, `ZSO%Rel`, `AdSv%`, SA60, TOI
+	$query2 ="SELECT a.nhl_id as player_id2, a.player_name as player_name2, a.pos as player_position2, a.team as player_team2, round(DATEDIFF(current_date(),DOB)/365.25,1) as age2,
+			 a.height, a.weight, coalesce(draft_info, 'Undrafted') as draft_info,
+			coalesce(d.G60, '--') as G60_1516, 
+			coalesce(d.A60, '--') as A60_1516, 
+			coalesce(d.P60, '--') as P60_1516, 
+			coalesce(f.Gm, d.Gm , '--') as Gm_1516, 
+			coalesce(d.`CF%`,'--') as CFPct_1516, 
+			coalesce(d.`CF%Rel`, '--') as CFRel_1516, 
+			coalesce(d.`CF60`, '--') as CF60_1516,
+			coalesce(d.`CA60`, '--') as CA60_1516,
+			coalesce(d.`TOI/Gm`, '--') as TOI_1516, 
+			coalesce(d.`ZSO%Rel`, '--') as ZSRel_1516, 
+			coalesce(d.`SCF%`, '--') as SCF_1516, 
+			coalesce(c.G60, '--') as G60_1415, 
+			coalesce(c.A60, '--') as A60_1415, 
+			coalesce(c.P60, '--') as P60_1415, 
+			coalesce(e.Gm, c.Gm, '--') as Gm_1415, 
+			coalesce(c.`CF%`, '--') as CFPct_1415, 
+			coalesce(c.`CF%Rel`, '--') as CFRel_1415,
+			coalesce(c.`CF60`, '--') as CF60_1415,
+			coalesce(c.`CA60`, '--') as CA60_1415,
+			coalesce(c.`TOI/Gm`, '--') as TOI_1415, 
+			coalesce(c.`ZSO%Rel`, '--') as ZSRel_1415, 
+			coalesce(c.`SCF%`, '--') as SCF_1415, 
+			coalesce(f.`AdSv%`, '--') as adjSV_1516, coalesce(f.`Sv%H`, '--') as hiSV_1516,
+			coalesce(e.`AdSv%`, '--') as adjSV_1415, coalesce(e.`Sv%H`, '--') as hiSV_1415
+		
 			 FROM hockey_roster_v1 as a
 			 LEFT JOIN hockey_draft_v0 as b
 			 on a.nhl_id = b.player_id
-			LEFT JOIN nhl_id_xwalk x
+			LEFT JOIN WAR_NHL_ID_walk x
 			 	on a.nhl_id = x.nhl_id
-			 LEFT JOIN CORSICA_skaters_1415 as c
-				on x.corsica_name=c.Player
-			 LEFT JOIN CORSICA_goalies_1415 as d
-				on x.corsica_name=d.Player
-			 LEFT JOIN CORSICA_skaters_1516 as e
-				on x.corsica_name=e.Player
-			 LEFT JOIN CORSICA_goalies_1516 as f
-				on x.corsica_name=f.Player
+			 LEFT JOIN  WAR_players_201415 as c
+				on x.WAR_Name=c.Name
+			 LEFT JOIN  WAR_players_201516 as d
+				on x.WAR_Name=d.Name
+			 LEFT JOIN  WAR_goalies_201415 as e
+				on x.WAR_Name=e.Name
+			 LEFT JOIN  WAR_goalies_201516 as f
+				on x.WAR_Name=f.Name
 			 where a.nhl_id = $player2";
 
 			 
@@ -235,7 +285,7 @@ if(isset($_POST['result'])){
 				<button type="submit" class="btn btn-default btn-lg btn-block" 
 				formaction=<?php pairsimHKY(15) ; ?> >
 					<?php if(isset($echo2['player_name2'])){
-						echo "Too Close (Next)";
+						echo "Not Sure (Next)";
 					} else {
 						echo "Try Again - New Matchup";
 					} ?>
@@ -243,32 +293,32 @@ if(isset($_POST['result'])){
 			</form>
 		</div>
 		</div>
-		<div class="row">
+		<!--div class="row">
 		<div class="col-lg-12">
 			<form name="hockey_game" action="hockey_form.php" method="POST">
-				<input type="hidden" name="p1" value="<?php echo $echo1['player_id1'];?>">
-				<input type="hidden" name="p2" value="<?php echo $echo2['player_id2'];?>">
-				<input type="hidden" name="pnm1" value="<?php echo $echo1['player_name1'];?>">
-				<input type="hidden" name="pnm2" value="<?php echo $echo2['player_name2'];?>">
-				<input type="hidden" name="p1_team" value="<?php echo $echo1['player_team1'];?>">
-				<input type="hidden" name="p2_team" value="<?php echo $echo2['player_team2'];?>">
+				<input type="hidden" name="p1" value="<?php// echo $echo1['player_id1'];?>">
+				<input type="hidden" name="p2" value="<?php// echo $echo2['player_id2'];?>">
+				<input type="hidden" name="pnm1" value="<?php// echo $echo1['player_name1'];?>">
+				<input type="hidden" name="pnm2" value="<?php// echo $echo2['player_name2'];?>">
+				<input type="hidden" name="p1_team" value="<?php// echo $echo1['player_team1'];?>">
+				<input type="hidden" name="p2_team" value="<?php// echo $echo2['player_team2'];?>">
 				<input type="hidden" name="result" value="unknown">
-				<input type="hidden" name="user_id" value="<?php echo $user_id ;?>">
-				<input type="hidden" name="prior_elo1" value="<?php echo $p1_elo ;?>">
-				<input type="hidden" name="prior_elo2" value="<?php echo $p2_elo ;?>">
-				<input type="hidden" name="post_elo1" value="<?php echo $p1_elo ;?>">
-				<input type="hidden" name="post_elo2" value="<?php echo $p2_elo ;?>">
+				<input type="hidden" name="user_id" value="<?php// echo $user_id ;?>">
+				<input type="hidden" name="prior_elo1" value="<?php// echo $p1_elo ;?>">
+				<input type="hidden" name="prior_elo2" value="<?php// echo $p2_elo ;?>">
+				<input type="hidden" name="post_elo1" value="<?php// echo $p1_elo ;?>">
+				<input type="hidden" name="post_elo2" value="<?php// echo $p2_elo ;?>">
 				<button type="submit" class="btn btn-primary btn-lg btn-block"
 				formaction=<?php pairsimHKY(15) ; ?> >
-					<?php if(isset($echo2['player_name2'])){
-						echo "Don't Know (Next)";
-					} else {
-						echo "Try Again - New Matchup";
+					<//?php if(isset($echo2['player_name2'])){
+					//	echo "Don't Know (Next)";
+					//} else {
+					//	echo "Try Again - New Matchup";
 					} ?>
 				</button>
 			</form>
 		</div>
-		</div>
+		</div-->
 	</div>
 	<br>
 
@@ -332,42 +382,68 @@ if(isset($_POST['result'])){
 					</tr-->		
 					<tr>
 						<td><span class='glyphicon glyphicon-wrench' aria-hidden='true'></span></a> GP</td>
-						<td><?php echo $echo1['Gm'] ?></td>
-						<td><?php echo $echo2['Gm'] ?></td>
+						<td><b><?php echo $echo1['Gm_1516'] . "</b> / " . $echo1['Gm_1415'] ; ?></td>
+						<td><b><?php echo $echo2['Gm_1516'] . "</b> / " . $echo2['Gm_1415'] ; ?></td>
 					</tr>
 
 					<?php if($echo1['player_position1'] != "G" or $echo2['player_position2'] != "G") {
 						echo "<tr>
 						<td><a href='#nhlstatspage' title='Goal Production - Goals per 60 Minutes' style='background-color:#FFFFFF;color:#000000;text-decoration:none'>
 									<span class='glyphicon glyphicon-stats' aria-hidden='true'></span></a> G60</td>
-						<td>".  $echo1['G60'] ."</td>
-						<td>".  $echo2['G60'] ."</td>
+						<td><b>".  $echo1['G60_1516'] ."</b> / ". $echo1['G60_1415'] . "</td>
+						<td><b>".  $echo2['G60_1516'] ."</b> / ". $echo2['G60_1415'] . "</td>
 					</tr>	
 					<tr>
 						<td><span class='glyphicon glyphicon-apple' aria-hidden='true'></span> A60</td>
-						<td>".  $echo1['A60'] ."</td>
-						<td>".  $echo2['A60'] ."</td>
+						<td><b>".  $echo1['A60_1516'] ."</b> / ". $echo1['A60_1415'] . "</td>
+						<td><b>".  $echo2['A60_1516'] ."</b> / ". $echo2['A60_1415'] . "</td>
 					</tr>					
 					<tr>
 						<td><span class='glyphicon glyphicon-dashboard' aria-hidden='true'></span> P60</td>
-						<td>".  $echo1['P60'] . "</td>
-						<td>".  $echo2['P60'] . "</td>
+						<td><b>".  $echo1['P60_1516'] ."</b> / ". $echo1['P60_1415'] . "</td>
+						<td><b>".  $echo2['P60_1516'] ."</b> / ". $echo2['P60_1415'] . "</td>
+					</tr>
+					<tr>
+						<td><span class='glyphicon glyphicon-record' aria-hidden='true'></span> SCF%</td>
+						<td><b>".  $echo1['SCF_1516'] ."</b> / ". $echo1['SCF_1415'] ."</td>
+						<td><b>".  $echo2['SCF_1516'] ."</b> / ". $echo2['SCF_1415'] ."</td>
 					</tr>		
 					<tr>
 						<td><span class='glyphicon glyphicon-map-marker' aria-hidden='true'></span> CF%</td>
-						<td>".  $echo1['CF%'] ."</td>
-						<td>".  $echo2['CF%'] ."</td>
-					</tr>"; } else { }?>	
+						<td><b>".  $echo1['CFPct_1516'] ."</b> / ". $echo1['CFPct_1415'] ."</td>
+						<td><b>".  $echo2['CFPct_1516'] ."</b> / ". $echo2['CFPct_1415'] ."</td>
+					</tr>
+					<tr>
+						<td><span class='glyphicon glyphicon-indent-left' aria-hidden='true'></span> CF% Rel</td>
+						<td><b>".  $echo1['CFRel_1516'] ."</b> / ". $echo1['CFRel_1415'] ."</td>
+						<td><b>".  $echo2['CFRel_1516'] ."</b> / ". $echo2['CFRel_1415'] ."</td>
+					</tr>
+					<tr>
+						<td><span class='glyphicon glyphicon-triangle-top' aria-hidden='true'></span> CF/60</td>
+						<td><b>".  $echo1['CF60_1516'] ."</b> / ". $echo1['CF60_1415'] ."</td>
+						<td><b>".  $echo2['CF60_1516'] ."</b> / ". $echo2['CF60_1415'] ."</td>
+					</tr>
+					<tr>
+						<td><span class='glyphicon glyphicon-triangle-bottom' aria-hidden='true'></span> CA/60</td>
+						<td><b>".  $echo1['CA60_1516'] ."</b> / ". $echo1['CA60_1415'] ."</td>
+						<td><b>".  $echo2['CA60_1516'] ."</b> / ". $echo2['CA60_1415'] ."</td>
+					</tr>
+					<tr>
+						<td><span class='lyphicon glyphicon-hourglass' aria-hidden='true'></span> TOI/Gm</td>
+						<td><b>".  $echo1['TOI_1516'] ."</b> / ". $echo1['TOI_1415'] ."</td>
+						<td><b>".  $echo2['TOI_1516'] ."</b> / ". $echo2['TOI_1415'] ."</td>
+					</tr>"; 
+					} else { }?>	
 					<?php if($echo1['player_position1'] == "G" or $echo2['player_position2'] == "G") {
 						echo "<tr>
 							<td><span class='glyphicon glyphicon-tasks' aria-hidden='true'></span> Adj Sv%</td>
-							<td>". $echo1['AdSv%'] ."</td>
-							<td>". $echo2['AdSv%'] ."</td>
+							<td><b>". $echo1['adjSV_1516'] ."</b> / ". $echo1['adjSV_1415'] ."</td>
+							<td><b>". $echo2['adjSV_1516'] ."</b> / ". $echo2['adjSV_1415'] ."</td>
 						</tr>
 						<tr>
-							<td><span class='glyphicon glyphicon-record' aria-hidden='true'></span> SA/60</td>
-							<td>". $echo1['SA60'] ."</td>
-							<td>". $echo2['SA60'] ."</td>
+							<td><span class='glyphicon glyphicon-flash' aria-hidden='true'></span> HD Sv%</td>
+							<td><b>". $echo1['hiSV_1516'] ."</b> / ". $echo1['hiSV_1415'] ."</td>
+							<td><b>". $echo2['hiSV_1516'] ."</b> / ". $echo2['hiSV_1415'] ."</td>
 						</tr>";
 						} else { }?>							
 				</tbody>	
@@ -381,14 +457,17 @@ if(isset($_POST['result'])){
 	<div class="container-fluid">
 	<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 	  Show Legend
-	</button>
+	</button> 	
+	<br>
+	<p><b>2015-2016 in Bold</b></p>
+	<p>Source: <a href="http://www.war-on-ice.com" target="_blank">www.war-on-ice.com</a></p>
 	</div>
 	<div class="collapse container-fluid" id="collapseExample">
 	  <div class="well">
 
-		<div class="container-fluid">
+		<!--div class="container-fluid">
 			<p><b>Note:</b> "Too Close" is used when both players are known, but can't be discerned. "Don't Know" will decrease the odds of receiving either player for a week.</p>
-		</div>
+		</div-->
 
 	    <div class="panel-body table table-striped">
 				<table class="table table-striped">
@@ -427,26 +506,48 @@ if(isset($_POST['result'])){
 						</tr>
 						<tr>
 						<td><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> GP</td>
-						<td>Games Played, 2014-15 Season - Source:war-on-ice.com</td>
+						<td>Games Played, <b>2015-16</b> / 2014-15 Season - Source: <a href="http://www.war-on-ice.com" target="_blank">www.war-on-ice.com</a></td>
 						</tr>
 						<tr>
 						<td><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> G60</td>
-						<td>Goals/60 Minutes, 2014-15 Season - Source:war-on-ice.com</td>
+						<td>Goals/60 Minutes, <b>2015-16</b> / 2014-15 Season - Source: <a href="http://www.war-on-ice.com" target="_blank">www.war-on-ice.com</a></td>
 						</tr>						
 						<td><span class="glyphicon glyphicon-apple" aria-hidden="true"></span> A60</td>
-						<td>Assists/60 Minutes, 2014-15 Season - Source:war-on-ice.com</td>
+						<td>Assists/60 Minutes, <b>2015-16</b> / 2014-15 Season - Source: <a href="http://www.war-on-ice.com" target="_blank">www.war-on-ice.com</a></td>
 						</tr>						
 						<td><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> P60</td>
-						<td>Points/60 Minutes, 2014-15 Season - Source:war-on-ice.com</td>
-						</tr>			
+						<td>Points/60 Minutes, <b>2015-16</b> / 2014-15 Season - Source: <a href="http://www.war-on-ice.com" target="_blank">www.war-on-ice.com</a></td>
+						</tr>
+						<tr>			
+						<td><span class="glyphicon glyphicon-record" aria-hidden="true"></span> SCF%</td>
+						<td>Scoring Chance For %, <b>2015-16</b> / 2014-15 Season - Source: <a href="http://www.war-on-ice.com" target="_blank">www.war-on-ice.com</a></td>
+						</tr>
+						<tr>	
 						<td><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> CF%</td>
-						<td>Corsi For % (ES On-Ice), 2014-15 Season - Source:war-on-ice.com</td>
+						<td>Corsi For %, <b>2015-16</b> / 2014-15 Season - Source: <a href="http://www.war-on-ice.com" target="_blank">www.war-on-ice.com</a></td>
+						</tr>
+						<tr>	
+						<td><span class="glyphicon glyphicon-indent-left" aria-hidden="true"></span> CF% Rel</td>
+						<td>Corsi For % Relative, <b>2015-16</b> / 2014-15 Season - Source: <a href="http://www.war-on-ice.com" target="_blank">www.war-on-ice.com</a></td>
+						</tr>
+						<tr>
+						<td><span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span> CF/60</td>
+						<td>Corsi For per 60 minutes, <b>2015-16</b> / 2014-15 Season - Source: <a href="http://www.war-on-ice.com" target="_blank">www.war-on-ice.com</a></td>
+						</tr>						
+						<tr>
+						<td><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> CA/60</td>
+						<td>Corsi Against per 60 minutes, <b>2015-16</b> / 2014-15 Season - Source: <a href="http://www.war-on-ice.com" target="_blank">www.war-on-ice.com</a></td>
+						</tr>						
+						<tr>
+						<td><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span> CA/60</td>
+						<td>Corsi Against per 60 minutes, <b>2015-16</b> / 2014-15 Season - Source: <a href="http://www.war-on-ice.com" target="_blank">www.war-on-ice.com</a></td>
 						</tr>			
+
 						<td><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Adj Sv%</td>
-						<td>Adjusted Save %, 2014-15 Season - Source:war-on-ice.com</td>
+						<td>Adjusted Save %, <b>2015-16</b> / 2014-15 Season - Source: <a href="http://www.war-on-ice.com" target="_blank">www.war-on-ice.com</a></td>
 						</tr>			
-						<td><span class="glyphicon glyphicon-record" aria-hidden="true"></span> SA/60</td>
-						<td>Shots Against/60 Minutes, 2014-15 Season - Source:war-on-ice.com</td>
+						<td><span class="glyphicon glyphicon-flash" aria-hidden="true"></span> HD Sv%</td>
+						<td>High Danger Save %, <b>2015-16</b> / 2014-15 Season - Source: <a href="http://www.war-on-ice.com" target="_blank">www.war-on-ice.com</a></td>
 						</tr>							      							      							      							     
 					</tbody>	
 				</table>

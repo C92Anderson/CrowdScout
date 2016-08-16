@@ -14,7 +14,7 @@ if(isset($_POST['submitted'])) {
         }
     }
 
-    $teamF_checkbox = array('tFBUF','tFARZ','tFATL','tFBAL','tFCAR','tFCHI','tFCIN','tFCLE','tFDAL','tFDEN','tFDET','tFGB','tFHOU','tFIND','tFJAX','tFKC','tFMIA','tFMIN','tFNE','tFNO','tFNYG','tFNYJ','tFOAK','tFPHI','tFPIT','tFSD','tFSEA','tFSF','tFSTL','tFTB','tFTEN','tFWSH');
+    $teamF_checkbox = array('tFBUF','tFARZ','tFATL','tFBAL','tFCAR','tFCHI','tFCIN','tFCLE','tFDAL','tFDEN','tFDET','tFGB','tFHOU','tFIND','tFJAX','tFKC','tFMIA','tFMIN','tFNE','tFNO','tFNYG','tFNYJ','tFOAK','tFPHI','tFPIT','tFSD','tFSEA','tFSF','tFLA','tFTB','tFTEN','tFWSH');
 
     foreach($teamF_checkbox as $check)  {
 
@@ -59,6 +59,7 @@ if(isset($_POST['submitted'])) {
 				<label class='checkbox-inline'><input type='checkbox' name='teamFsel[]' value='tFIND' <?PHP if($_SESSION['tFIND']) { echo 'checked'; }?> >IND</label>
 				<label class='checkbox-inline'><input type='checkbox' name='teamFsel[]' value='tFJAX' <?PHP if($_SESSION['tFJAX']) { echo 'checked'; }?> >JAX</label>
 				<label class='checkbox-inline'><input type='checkbox' name='teamFsel[]' value='tFKC' <?PHP if($_SESSION['tFKC']) { echo 'checked'; }?> >KC</label>
+				<label class='checkbox-inline'><input type='checkbox' name='teamFsel[]' value='tFLA' <?PHP if($_SESSION['tFLA']) { echo 'checked'; }?> >LA</label>
 				<label class='checkbox-inline'><input type='checkbox' name='teamFsel[]' value='tFMIA' <?PHP if($_SESSION['tFMIA']) { echo 'checked'; }?> >MIA</label>
 				<label class='checkbox-inline'><input type='checkbox' name='teamFsel[]' value='tFMIN' <?PHP if($_SESSION['tFMIN']) { echo 'checked'; }?> >MIN</label>
 				<label class='checkbox-inline'><input type='checkbox' name='teamFsel[]' value='tFNE' <?PHP if($_SESSION['tFNE']) { echo 'checked'; }?> >NE</label>
@@ -71,7 +72,6 @@ if(isset($_POST['submitted'])) {
 				<label class='checkbox-inline'><input type='checkbox' name='teamFsel[]' value='tFSD' <?PHP if($_SESSION['tFSD']) { echo 'checked'; }?> >SD</label>
 				<label class='checkbox-inline'><input type='checkbox' name='teamFsel[]' value='tFSEA' <?PHP if($_SESSION['tFSEA']) { echo 'checked'; }?> >SEA</label>
 				<label class='checkbox-inline'><input type='checkbox' name='teamFsel[]' value='tFSF' <?PHP if($_SESSION['tFSF']) { echo 'checked'; }?> >SF</label>
-				<label class='checkbox-inline'><input type='checkbox' name='teamFsel[]' value='tFSTL' <?PHP if($_SESSION['tFSTL']) { echo 'checked'; }?> >STL</label>
 				<label class='checkbox-inline'><input type='checkbox' name='teamFsel[]' value='tFTB' <?PHP if($_SESSION['tFTB']) { echo 'checked'; }?> >TB</label>
 				<label class='checkbox-inline'><input type='checkbox' name='teamFsel[]' value='tFTEN' <?PHP if($_SESSION['tFTEN']) { echo 'checked'; }?> >TEN</label>
 				<label class='checkbox-inline'><input type='checkbox' name='teamFsel[]' value='tFWSH' <?PHP if($_SESSION['tFWSH']) { echo 'checked'; }?> >WSH</label>

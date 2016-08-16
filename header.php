@@ -22,7 +22,8 @@
 
 <html>
 
-<link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="images/logo_sm_v4.ico" sizes="32x32" />
+<!--link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
 <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
 
 	
@@ -53,7 +54,7 @@
 				<div class="navbar-header">  
 					
 					<a class="navbar-brand" href="index.php">
-						<img src="images/CsLogo2.png" height="30" width="105">
+						<img src="images/logo_v4.png" height="30" width="111">
 					</a>
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 	  			   		<span class="sr-only">Toggle navigation</span>
@@ -101,25 +102,14 @@
 						<li>
 							<div class="dropdown navbar-left">
 							  <button class="btn btn-primary btn-lg dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							    Player Compare
+							    View Rankings
 							    <span class="caret"></span>
 							  </button>
 							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
 							    <li><a class="btn btn-default btn-lg" href="football_p_compare.php">Football Compare Tool</a></li>
 							    <li><a class="btn btn-default btn-lg" href="hockey_p_compare.php">Hockey Compare Tool</a></li>
-							  </ul>
-							</div>
-						</li>
-
-						<li>
-							<div class="dropdown navbar-left">
-							  <button class="btn btn-primary btn-lg dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							    Current Rankings
-							    <span class="caret"></span>
-							  </button>
-							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu4">
-	
-							    <li><a class="btn btn-default btn-lg" href="football_rankings.php">Current Football Rankings</a></li>
+							    <li role="separator" class="divider"></li>
+								<li><a class="btn btn-default btn-lg" href="football_rankings.php">Current Football Rankings</a></li>
 							    <li><a class="btn btn-default btn-lg" href="hockey_rankings.php">Current Hockey Rankings</a></li>
 							  </ul>
 							</div>
@@ -128,7 +118,11 @@
 					</ul>
 					<!--Right navigation bar-->
 					 <ul class="nav navbar-nav navbar-right">
-					 	<li><a href="about.php">About</a></li>
+					 	<li>
+					 	 <a class="btn btn-default btn-lg" href="game-theory/">Game Theory Blog</a></li>
+						
+					 	 <li><a href="about.php">About</a></li>
+				
 						<?php 
 							if(isset($scout)){
 							echo "<li class='active'><a href='profile.php?scout=" . $getid . "'>". $scout . "'s Scouting HQ<span class='sr-only'>(current)</span></a></li>" ;  
@@ -139,7 +133,6 @@
 							echo '<li><a href="signin.php">SignIn</a></li>' ; 
 						}?>
 					</ul>
-						
 				</div>
 
 				<!--Compare Players Tool-->

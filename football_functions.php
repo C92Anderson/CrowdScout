@@ -48,13 +48,13 @@ function pairsimFB($comps) {
 			if($_SESSION['tFSD']==1) {  $teamF_list = $teamF_list.'|SD'; }
 			if($_SESSION['tFSEA']==1) {  $teamF_list = $teamF_list.'|SEA'; }
 			if($_SESSION['tFSF']==1) {  $teamF_list = $teamF_list.'|SF'; }
-			if($_SESSION['tFSTL']==1) {  $teamF_list = $teamF_list.'|STL'; }
+			if($_SESSION['tFLA']==1) {  $teamF_list = $teamF_list.'|STL|RAM|LA'; }
 			if($_SESSION['tFTB']==1) {  $teamF_list = $teamF_list.'|TB'; }
 			if($_SESSION['tFTEN']==1) {  $teamF_list = $teamF_list.'|TEN'; }
 			if($_SESSION['tFWSH']==1) {  $teamF_list = $teamF_list.'|WSH'; }
 
 			if($teamF_list=="All") {
-				$teamF_list="BUF|ARZ|ATL|BAL|CAR|CHI|CIN|CLE|DAL|DEN|DET|GB|HOU|IND|JAX|KC|MIA|MIN|NE|NO|NYG|NYJ|OAK|PHI|PIT|SD|SEA|SF|STL|TB|TEN|WSH";
+				$teamF_list="BUF|ARZ|ATL|BAL|CAR|CHI|CIN|CLE|DAL|DEN|DET|GB|HOU|IND|JAX|KC|MIA|MIN|NE|NO|NYG|NYJ|OAK|PHI|PIT|SD|SEA|SF|LA|TB|TEN|WSH";
 		}
 
 
@@ -88,13 +88,13 @@ function pairsimFB($comps) {
 				FROM 
 
 				(SELECT * 
-				FROM football_roster_v1
+				FROM football_roster_R
 				ORDER BY RAND( ) 
 				LIMIT $comps	) AS A
 
 				JOIN 
 				(SELECT cs_id AS player_id1, player_name AS player1,  `pos` AS pos1,  `team` AS team1,  `dob` AS dob1
-				FROM football_roster_v1
+				FROM football_roster_R
 
 				WHERE `pos` REGEXP ('$posF_list')
 				AND `team` REGEXP ('$teamF_list')

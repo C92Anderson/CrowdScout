@@ -73,7 +73,7 @@ $mysqli->close();
 
 		 <div clas="container">
 		
-		<iframe src=" https://crowdscoutsports.shinyapps.io/footballtable" style="border: none; width:100%; height:2500px;"></iframe>
+		<iframe src="https://crowdscoutsports.shinyapps.io/Football_Table" style="border: none; width:100%; height:2500px;"></iframe>
 		
 		</div>
 		</div>	
