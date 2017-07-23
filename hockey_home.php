@@ -17,13 +17,6 @@ $_SESSION['no_insert'] = True ;
 		die("Connection failed: " . $conn->connect_error);
 	} 
 
-	$live_ts = time();
-	$string_ts = strtotime($live_ts) ;
-	$future = strtotime(time())  + 300;
-	//echo $live_ts ;
-	//echo "<br>". $string_ts ;
-	//echo "<br>". $future ;
-
 	$hockey_top10F = $conn->query("SELECT player_name, score
 										FROM  `hockey_topcounts` A
 										WHERE class =  'FWDTOP10'
@@ -85,7 +78,7 @@ $_SESSION['no_insert'] = True ;
 <html>
 	<head>
 	<meta charset="UTF-8">
-	<meta name="description" content="Crowd Scouting Player Rankings">
+	<meta name="description" content="CrowdScout Hockey Ratings">
 	<meta name="keywords" content="Hockey,Player,Rankings,Scout,Scouting">
 		<title>CrowdScout Hockey</title>
 	

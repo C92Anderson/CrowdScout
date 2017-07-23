@@ -100,8 +100,8 @@ $_SESSION['no_insert'] = True ;
 <html>
 	<head>
 	<meta charset="UTF-8">
-	<meta name="description" content="Crowd Scout Football Player Ratings">
-	<meta name="keywords" content="Football,Player,Rankings,Scout,Scouting">
+	<meta name="description" content="CrowdScout Football Player Ratings">
+	<meta name="keywords" content="Football,Player,Ratings,Scout,Scouting">
 		<title>CrowdScout Football</title>
 	
 		<?php include('header.php');?>

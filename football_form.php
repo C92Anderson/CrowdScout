@@ -172,8 +172,8 @@ if(isset($_POST['result'])){
 
 	<head>
 	<meta charset="UTF-8">
-	<meta name="description" content="Crowd Scouting Player Rankings">
-	<meta name="keywords" content="Football,Player,Rankings,Scout,Scouting">
+	<meta name="description" content="CrowdScout Football Scouting">
+	<meta name="keywords" content="Football,Player,Scout,Scouting">
 		<title>CrowdScout Football</title>
 	
 		<?php include('header.php');?>
