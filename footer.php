@@ -1,10 +1,10 @@
 	<br>
  	<div class="footer container" align="middle">
-        	<p>&copy; CrowdScout 2016 </p>
+        	<p>&copy; CrowdScout 2017 </p>
         			<a href="https://twitter.com/CrowdScoutSprts" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @CrowdScoutSprts</a>
 					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 			<br>
-        	 <p>Questions/Comments? cole92anderson@gmail.com</p>
+        	 <p>Questions/Comments? <a href="mailto:info@crowdscoutsports.com?Subject=CrowdScout Comment" target="_top">Email info@crowdscoutsports.com</a></p>
       </div>
 	
 			<!--Google Analytics-->
