@@ -60,9 +60,9 @@ $mysqli->close();
 	<head>
 	<meta charset="UTF-8">
 	<meta name="google-site-verification" content="Zq3wnZjPy7XD54ZlMrmn3jYlyxtGR-cY_OyRLCBCtYc" />
-	<meta name="description" content="Crowd Scouting Player Rankings">
-	<meta name="keywords" content="Football,Hockey,Baseball,Basketball,Player,Rankings,Scout,Scouting">
-		<title>CrowdScout</title>
+	<meta name="description" content="CrowdScout Player Ratings">
+	<meta name="keywords" content="Football,Hockey,Player,Rankings,Ratings,Scout,Scouting">
+		<title>CrowdScout Sports</title>
 
 		<?php include('header.php');?>
 	
@@ -85,7 +85,12 @@ $mysqli->close();
 			echo    "<div class='jumbotron'>
 					<h3>Welcome Back!</h3>
 				</div>";
+		} else if($_GET['msg'] == 'notplayer'){
+			echo    "<div class='jumbotron'>
+					<h3>Player not in database, try again!</h3>
+				</div>";
 		}
+
 		?>
 
 		</br>

@@ -65,7 +65,7 @@ $mysqli->close();
 
 
 		 <div clas="container">
-		
+		 <p>Warning: app may be down due to server usage limits, please use 'Player Search' in toolbar in meantime, or send request to @crowdscoutsprts on Twitter.</p> 
 		<iframe src=" https://crowdscoutsports.shinyapps.io/footballcomp2" style="border: none; width:100%; height:700px"></iframe>
 		
 
